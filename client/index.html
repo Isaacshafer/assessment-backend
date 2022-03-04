@@ -4,17 +4,24 @@
     <title>Back End Assessment</title>
   </head>
   <body class="container">
-    <button id="complimentButton">Get a compliment</button>
+    <button id="complimentButton">Get a compliment</button> 
+    <button id="fortuneButton">Get Fortune</button>
+    <form>
+      <input type="text" name="" id="input-1" placeholder="enter name">
+      <button id="submitButton">submit</button>
+    </form>
+
+    <form>
+      <input type="text" id="input-2" placeholder="name to delete">
+      <button id="deleteButton">Delete Name</button>
+      <button id="getUsers">get users</button>
+    </form>
+
+
+
+
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-      document.getElementById("complimentButton").onclick = function () {
-        axios.get("http://localhost:4000/api/compliment/")
-            .then(function (response) {
-              const data = response.data;
-              alert(data);
-            });
-      };
-    </script>
+    <script src="main.js"></script>
   </body>
-</html>
+</html> 
