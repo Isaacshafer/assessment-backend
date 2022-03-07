@@ -15,26 +15,25 @@ document.getElementById("complimentButton").onclick = function () {
   };
   
 
-  let sayHello = (body) => {
-      axios.post('http://localhost:4000/api/hello', body)
-      .then(res => {
-          alert(res.data)
-        })
-  }
   let submitButton = document.querySelector('#submitButton')
-  let submithandler = () => {
+
+  let createName = () => {
       
     let input = document.querySelector('#input-1')
     let bodyObj = {
     input: input.value
     }
-    sayHello(bodyObj)
+    axios.post('http://localhost:4000/api/hello', bodyObj)
+      .then(res => {
+          alert(res.data)
+        })
   }
   
 
-  let nameDeleter = (body) => {
-      axios.delete('http://localhost:4000/api/delete', body)
-      .then(res => {
+  let nameDeleter = () => {      
+    let newIndex = document.getElementById('input-2').value    
+      axios.delete(`http://localhost:4000/api/delete/${newIndex}`)
+      .then((res) => {
           alert(res.data)
       })
   }
@@ -42,26 +41,30 @@ document.getElementById("complimentButton").onclick = function () {
 
  
 
-      
-
-  let deleteHandler = (e) => {
-    e.preventDefault()
-    let deleteName = document.getElementById('input-2')
-    let bodyObj = {
-          deleteName: deleteName.value
-      }
-    console.log(deleteName)
-    console.log(deleteName.value)
-    console.log(bodyObj)
-    nameDeleter(bodyObj)
-  }
 let getUsersButton = document.getElementById('getUsers')
   let getUsers = () => {
       axios('http://localhost:4000/api/users')
       .then(res => alert(res.data))
   }
-submitButton.addEventListener('click', submithandler)
-deleteButton.addEventListener('click', deleteHandler)
-getUsersButton.addEventListener('click', getUsers)
 
+let editUsers = () => {
+  let newName = document.getElementById('newName').value
+  let changeIndex = document.getElementById('nameIndex').value
+  let bodyObj = {
+    newName
+  }
+  axios.put(`http://localhost:4000/api/edit/${changeIndex}`, bodyObj)
+  .then(res => {
+    alert(res.data)
+  })
+
+}
+let editName = document.getElementById('editName')
+
+
+
+submitButton.addEventListener('click', createName)
+deleteButton.addEventListener('click', nameDeleter)
+getUsersButton.addEventListener('click', getUsers)
+editName.addEventListener('click', editUsers)
 
